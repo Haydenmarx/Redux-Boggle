@@ -1,4 +1,4 @@
-const testDice = [
+const dice = [
   ["A", "A", "E", "E", "G", "N"],
   ["A", "B", "B", "J", "O", "O"],
   ["A", "C", "H", "O", "P", "S"],
@@ -17,7 +17,7 @@ const testDice = [
   ["H", "L", "N", "N", "R", "Z"]
 ];
 
-const testBoard = [
+const board = [
   "A",
   "B",
   "C",
@@ -36,9 +36,40 @@ const testBoard = [
   "Z"
 ];
 
+const boardStatus = [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  true,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+];
+
 const testGames = [
-  { id: 0, board: testBoard, players: [], testDice: testDice },
-  { id: 1, board: [], players: [], testDice: [] }
+  {
+    id: 0,
+    board,
+    boardStatus,
+    players: [],
+    dice
+  },
+  {
+    id: 1,
+    board,
+    boardStatus,
+    players: [],
+    dice
+  }
 ];
 
 const games = (state = testGames, action) => {

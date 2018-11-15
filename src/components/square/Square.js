@@ -5,14 +5,15 @@ import "./Square.css";
 const Square = props => {
   return (
     <div className="container">
-      <button className="">{props.square}</button>
+      <button className={props.status ? "chosen" : ""}>{props.square}</button>
     </div>
   );
 };
 
 const mapStateToProps = function(state, ownProps) {
   return {
-    square: state.games[ownProps.gameIndex].board[ownProps.squareIndex]
+    square: state.games[ownProps.gameIndex].board[ownProps.squareIndex],
+    status: state.games[ownProps.gameIndex].boardStatus[ownProps.squareIndex]
   };
 };
 
