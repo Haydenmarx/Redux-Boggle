@@ -5,8 +5,8 @@ import "./App.css";
 
 const App = props => (
   <div className="App">
-    {props.games.map(game => (
-      <Game />
+    {props.games.map((game, index) => (
+      <Game key={game.id} index={index} />
     ))}
   </div>
 );
