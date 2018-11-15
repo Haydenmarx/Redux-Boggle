@@ -1,0 +1,14 @@
+.container {
+  /* move back to component to allow for 16: 25% and 25: 20% boards*/
+  flex: 25%;
+  display: flex;
+  height: ;
+}
+
+button {
+  flex: 1;
+}
+
+.chosen {
+  background-color: green;
+}

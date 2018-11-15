@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import Square from "../square/Square";
+import "./Board.css";
 
 const Board = props => {
   return (
-    <div>
-      <h1>Game {props.game.id}</h1>
+    <div className="Board">
       {props.game.board.map((square, index) => (
         <Square
           key={`Game${props.index}Square${index}`}

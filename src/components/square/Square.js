@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import "./Square.css";
 
 const Square = props => {
   return (
-    <div>
-      <button>{props.square}</button>
+    <div className="container">
+      <button className="">{props.square}</button>
     </div>
   );
 };

@@ -1,0 +1,7 @@
+.Board {
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  width: 250px;
+  height: 250px;
+}
