@@ -4,4 +4,7 @@
   flex-flow: row wrap;
   width: 250px;
   height: 250px;
+  background: blue;
+  padding: 20px;
+  border-radius: 30px;
 }

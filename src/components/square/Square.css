@@ -6,6 +6,10 @@
 
 button {
   flex: 1;
+  box-sizing: content-box;
+  margin: 5%;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .chosen {
