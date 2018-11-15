@@ -46,7 +46,7 @@ const boardStatus = [
   false,
   false,
   false,
-  true,
+  false,
   false,
   false,
   false,
@@ -74,9 +74,19 @@ const testGames = [
 
 const games = (state = testGames, action) => {
   switch (action.type) {
-    case "Something":
-      return [...action.something, ...state];
+    case "Update_Clicked":
+      let updatedBoard = state[action.boardIndex];
+      updatedBoard.boardStatus = state[action.boardIndex].boardStatus.slice();
+      updatedBoard.boardStatus[action.squareIndex] = !updatedBoard.boardStatus[
+        action.squareIndex
+      ];
+      return [
+        ...state.slice(0, action.boardIndex),
+        updatedBoard,
+        ...state.slice(action.boardIndex + 1)
+      ];
     default:
+      console.log("default:", action);
       return state;
   }
 };

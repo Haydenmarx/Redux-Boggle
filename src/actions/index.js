@@ -3,3 +3,9 @@ export const Action = (id, name) => ({
   id,
   name
 });
+
+export const UpdateDieClicked = (boardIndex, squareIndex) => ({
+  type: "Update_Clicked",
+  boardIndex,
+  squareIndex
+});

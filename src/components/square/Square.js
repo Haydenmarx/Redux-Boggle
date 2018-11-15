@@ -3,9 +3,14 @@ import { connect } from "react-redux";
 import "./Square.css";
 
 const Square = props => {
+  const toggleClicked = () => {
+    props.ToggleClicked(props.gameIndex, props.squareIndex);
+  };
   return (
     <div className="container">
-      <button className={props.status ? "chosen" : ""}>{props.square}</button>
+      <button onClick={toggleClicked} className={props.status ? "chosen" : ""}>
+        {props.square}
+      </button>
     </div>
   );
 };
@@ -17,4 +22,18 @@ const mapStateToProps = function(state, ownProps) {
   };
 };
 
-export default connect(mapStateToProps)(Square);
+const mapDispatchToProps = dispatch => {
+  return {
+    ToggleClicked: (boardIndex, squareIndex) =>
+      dispatch({
+        type: "Update_Clicked",
+        boardIndex,
+        squareIndex
+      })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Square);
