@@ -107,13 +107,21 @@ const games = (state = testGames, action) => {
         ...state.slice(action.boardIndex + 1)
       ];
     case "Submit_Word":
-      if (state[action.boardIndex].wordList[action.word] === undefined) {
+      if (
+        state[action.boardIndex].wordList[action.word] === undefined &&
+        action.word.split("-").length > 2
+      ) {
         //add word
         updatedBoard = state[action.boardIndex];
         updatedBoard.wordList = { ...updatedBoard.wordList };
         updatedBoard.wordList[action.word] = true;
         //untoggle letters
+        updatedBoard.boardStatus = updatedBoard.boardStatus.slice();
+        action.word
+          .split("-")
+          .forEach(index => (updatedBoard.boardStatus[index] = false));
         //clear current word
+        updatedBoard.currentWord = [];
         return [
           ...state.slice(0, action.boardIndex),
           updatedBoard,

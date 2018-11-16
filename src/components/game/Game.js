@@ -29,7 +29,7 @@ class Game extends Component {
         <button onClick={this.submitWord}>Submit Word</button>
         <ul>
           {Object.keys(this.props.submittedWords).map(word => {
-            return <li>{word}</li>;
+            return <li key={word}>{word}</li>;
           })}
         </ul>
       </div>
