@@ -75,7 +75,7 @@ const testGames = [
 const games = (state = testGames, action) => {
   switch (action.type) {
     case "Update_Clicked":
-      let updatedBoard = state[action.boardIndex];
+      var updatedBoard = state[action.boardIndex];
       updatedBoard.boardStatus = state[action.boardIndex].boardStatus.slice();
       updatedBoard.boardStatus[action.squareIndex] = !updatedBoard.boardStatus[
         action.squareIndex
@@ -85,10 +85,40 @@ const games = (state = testGames, action) => {
         updatedBoard,
         ...state.slice(action.boardIndex + 1)
       ];
+    case "Randomize_Board":
+      updatedBoard = state[action.boardIndex];
+      const newBoard = randomize(action.dice);
+      updatedBoard.board = newBoard;
+      return [
+        ...state.slice(0, action.boardIndex),
+        updatedBoard,
+        ...state.slice(action.boardIndex + 1)
+      ];
     default:
-      console.log("default:", action);
       return state;
   }
+};
+
+const randomize = dice => {
+  let board = dice.map(die => randomizeItem(die, true));
+  randomizeRow(board);
+  return board;
+};
+const randomizeRow = arr => {
+  let newArr = arr.slice();
+  let result = [];
+  let found;
+  while (newArr.length > 0) {
+    found = Math.floor(Math.random() * newArr.length);
+    result.push(newArr[found]);
+    newArr.splice(found, 1);
+  }
+  return result;
+};
+const randomizeItem = arr => {
+  let newArr = arr.slice();
+  const found = Math.floor(Math.random() * newArr.length);
+  return newArr[found];
 };
 
 export default games;

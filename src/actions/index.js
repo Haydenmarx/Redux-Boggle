@@ -9,3 +9,9 @@ export const UpdateDieClicked = (boardIndex, squareIndex) => ({
   boardIndex,
   squareIndex
 });
+
+export const RandomizeBoard = (boardIndex, dice) => ({
+  type: "Randomize_Board",
+  boardIndex,
+  dice
+});
