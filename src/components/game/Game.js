@@ -1,19 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import Board from "../board/Board";
 import { connect } from "react-redux";
 
-const Game = props => {
-  const startNewGame = () => {
-    props.ToggleClicked(props.index, props.dice);
+class Game extends Component {
+  startNewGame = () => {
+    this.props.ToggleClicked(this.props.index, this.props.dice);
   };
-  return (
-    <div>
-      <h1>Game {props.index}</h1>
-      <Board index={props.index} />
-      <button onClick={startNewGame}>New Game</button>
-    </div>
-  );
-};
+  componentDidMount() {
+    this.startNewGame();
+  }
+  render() {
+    return (
+      <div>
+        <h1>Game {this.props.index}</h1>
+        <Board index={this.props.index} />
+        <button onClick={this.startNewGame}>New Game</button>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = function(state, ownProps) {
   return {
