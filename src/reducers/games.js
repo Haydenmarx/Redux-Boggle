@@ -61,25 +61,33 @@ const testGames = [
     board,
     boardStatus,
     players: [],
-    dice
+    dice,
+    currentWord: []
   },
   {
     id: 1,
     board,
     boardStatus,
     players: [],
-    dice
+    dice,
+    currentWord: []
   }
 ];
 
 const games = (state = testGames, action) => {
   switch (action.type) {
     case "Update_Clicked":
-      if (validateMove(action.index)) {
+      if (validateMove(action.squareIndex)) {
         var updatedBoard = state[action.boardIndex];
         updatedBoard.boardStatus = state[action.boardIndex].boardStatus.slice();
         updatedBoard.boardStatus[action.squareIndex] = !updatedBoard
           .boardStatus[action.squareIndex];
+        updatedBoard.currentWord = updatedBoard.currentWord.slice();
+        if (state[action.boardIndex].boardStatus[action.squareIndex]) {
+          updatedBoard.currentWord.push(action.squareIndex);
+        } else {
+          updatedBoard.currentWord.pop();
+        }
         return [
           ...state.slice(0, action.boardIndex),
           updatedBoard,
@@ -105,6 +113,14 @@ const validateMove = index => {
   //actual validation to be added
   return true;
 };
+
+const rowAndColumnFinder = index => {
+  const column = Math.abs(index % 4);
+  const row = Math.floor(Math.abs(index / 4));
+  return [row, column];
+};
+
+const addOrRemove = index => {};
 
 const randomize = dice => {
   let board = dice.map(die => randomizeItem(die, true));
