@@ -75,16 +75,18 @@ const testGames = [
 const games = (state = testGames, action) => {
   switch (action.type) {
     case "Update_Clicked":
-      var updatedBoard = state[action.boardIndex];
-      updatedBoard.boardStatus = state[action.boardIndex].boardStatus.slice();
-      updatedBoard.boardStatus[action.squareIndex] = !updatedBoard.boardStatus[
-        action.squareIndex
-      ];
-      return [
-        ...state.slice(0, action.boardIndex),
-        updatedBoard,
-        ...state.slice(action.boardIndex + 1)
-      ];
+      if (validateMove(action.index)) {
+        var updatedBoard = state[action.boardIndex];
+        updatedBoard.boardStatus = state[action.boardIndex].boardStatus.slice();
+        updatedBoard.boardStatus[action.squareIndex] = !updatedBoard
+          .boardStatus[action.squareIndex];
+        return [
+          ...state.slice(0, action.boardIndex),
+          updatedBoard,
+          ...state.slice(action.boardIndex + 1)
+        ];
+      }
+      return state;
     case "Randomize_Board":
       updatedBoard = state[action.boardIndex];
       const newBoard = randomize(action.dice);
@@ -97,6 +99,11 @@ const games = (state = testGames, action) => {
     default:
       return state;
   }
+};
+
+const validateMove = index => {
+  //actual validation to be added
+  return true;
 };
 
 const randomize = dice => {
