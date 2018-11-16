@@ -62,7 +62,8 @@ const testGames = [
     boardStatus,
     players: [],
     dice,
-    currentWord: []
+    currentWord: [],
+    wordList: {}
   },
   {
     id: 1,
@@ -70,7 +71,8 @@ const testGames = [
     boardStatus,
     players: [],
     dice,
-    currentWord: []
+    currentWord: [],
+    wordList: []
   }
 ];
 
@@ -104,6 +106,23 @@ const games = (state = testGames, action) => {
         updatedBoard,
         ...state.slice(action.boardIndex + 1)
       ];
+    case "Submit_Word":
+      if (state[action.boardIndex].wordList[action.word] === undefined) {
+        //add word
+        updatedBoard = state[action.boardIndex];
+        updatedBoard.wordList = { ...updatedBoard.wordList };
+        updatedBoard.wordList[action.word] = true;
+        //untoggle letters
+        //clear current word
+        return [
+          ...state.slice(0, action.boardIndex),
+          updatedBoard,
+          ...state.slice(action.boardIndex + 1)
+        ];
+      } else {
+        //don't add word
+        return state;
+      }
     default:
       return state;
   }
@@ -136,8 +155,6 @@ const adjacencyChecker = (coords1, coords2) => {
     Math.abs(coords1[1] - coords2[1]) < 2
   );
 };
-
-const addOrRemove = index => {};
 
 const randomize = dice => {
   let board = dice.map(die => randomizeItem(die, true));

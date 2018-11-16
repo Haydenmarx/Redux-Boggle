@@ -15,3 +15,9 @@ export const RandomizeBoard = (boardIndex, dice) => ({
   boardIndex,
   dice
 });
+
+export const SubmitWord = (boardIndex, word) => ({
+  type: "Submit_Word",
+  boardIndex,
+  word
+});
