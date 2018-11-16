@@ -15,10 +15,9 @@ class Game extends Component {
         <h1>Game {this.props.index}</h1>
         {/* {this.props.currentWord.length > 0 && ( */}
         <h3>
-          {console.log(this.props)}
           <span>Current Word:</span>
           {this.props.currentWord.map(index => (
-            <span>{this.props.board[index]}</span>
+            <span key={index}>{this.props.board[index]}</span>
           ))}
         </h3>
         {/* })} */}

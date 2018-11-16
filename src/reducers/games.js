@@ -77,8 +77,8 @@ const testGames = [
 const games = (state = testGames, action) => {
   switch (action.type) {
     case "Update_Clicked":
-      if (validateMove(action.squareIndex)) {
-        var updatedBoard = state[action.boardIndex];
+      var updatedBoard = state[action.boardIndex];
+      if (validateMove(action.squareIndex, updatedBoard)) {
         updatedBoard.boardStatus = state[action.boardIndex].boardStatus.slice();
         updatedBoard.boardStatus[action.squareIndex] = !updatedBoard
           .boardStatus[action.squareIndex];
@@ -109,15 +109,32 @@ const games = (state = testGames, action) => {
   }
 };
 
-const validateMove = index => {
-  //actual validation to be added
-  return true;
+const validateMove = (index, board) => {
+  const lastLetter = board.currentWord.length - 1;
+  if (board.currentWord.length === 0) return true;
+  if (board.currentWord[lastLetter] === index) return true;
+  if (
+    adjacencyChecker(
+      rowAndColumnFinder(index),
+      rowAndColumnFinder(board.currentWord[lastLetter])
+    ) &&
+    !board.boardStatus[index]
+  )
+    return true;
+  return false;
 };
 
 const rowAndColumnFinder = index => {
-  const column = Math.abs(index % 4);
-  const row = Math.floor(Math.abs(index / 4));
+  const column = index % 4;
+  const row = Math.floor(index / 4);
   return [row, column];
+};
+
+const adjacencyChecker = (coords1, coords2) => {
+  return (
+    Math.abs(coords1[0] - coords2[0]) < 2 &&
+    Math.abs(coords1[1] - coords2[1]) < 2
+  );
 };
 
 const addOrRemove = index => {};
